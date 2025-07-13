@@ -1,0 +1,239 @@
+:root {
+    --gold: #d4af37;
+    --dark-gold: #b38b2d;
+    --dark-bg: #0a0a0a;
+    --darker-bg: #050505;
+    --light-text: #f5f5f5;
+    --medium-text: #b3b3b3;
+    --dark-text: #666;
+    --form-bg: #1a1a1a;
+    --input-bg: #2a2a2a;
+  }
+  
+  .contact-section {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    padding: 5rem 1rem;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  .contact-container {
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .contact-header {
+    text-align: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .contact-subtitle {
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 1rem;
+  }
+  
+  .contact-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  
+  .highlight {
+    color: var(--gold);
+  }
+  
+  .contact-description {
+    color: var(--medium-text);
+    font-size: 1.125rem;
+    line-height: 1.6;
+  }
+  
+  .contact-content {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  @media (min-width: 992px) {
+    .contact-content {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .contact-form-container {
+    background-color: var(--form-bg);
+    padding: 2.5rem;
+    border-radius: 0.5rem;
+    border-left: 4px solid var(--gold);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  }
+  
+  .form-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  
+  .form-icon {
+    color: var(--gold);
+    font-size: 1.25rem;
+  }
+  
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .form-label {
+    color: var(--light-text);
+    font-size: 0.875rem;
+    font-weight: 500;
+  }
+  
+  .form-input, .form-textarea {
+    background-color: var(--input-bg);
+    border: 1px solid #333;
+    border-radius: 0.25rem;
+    padding: 0.875rem 1rem;
+    color: var(--light-text);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+  }
+  
+  .form-input:focus, .form-textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+  }
+  
+  .form-textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  
+  .submit-button {
+    background: linear-gradient(135deg, var(--gold), var(--dark-gold));
+    color: #000;
+    font-weight: 600;
+    padding: 1rem;
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+  }
+  
+  .submit-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+  }
+  
+  .button-icon {
+    font-size: 1rem;
+  }
+  
+  .contact-info {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    color: var(--medium-text);
+    font-size: 0.875rem;
+    line-height: 1.5;
+  }
+  
+  .info-icon {
+    color: var(--gold);
+    font-size: 1rem;
+    margin-top: 0.125rem;
+  }
+  
+  .location-card {
+    position: relative;
+    height: 100%;
+    min-height: 500px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+  }
+  
+  .map-pattern {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+      linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+      url('https://maps.googleapis.com/maps/api/staticmap?center=40.7128,-74.0060&zoom=15&size=800x600&scale=2&maptype=roadmap&markers=color:gold%7C40.7128,-74.0060&key=YOUR_API_KEY');
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .map-marker {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .marker-icon {
+    font-size: 2.5rem;
+    color: var(--gold);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.5));
+  }
+  
+  .location-info {
+    position: absolute;
+    bottom: 2rem;
+    left: 2rem;
+    right: 2rem;
+    background: rgba(10, 10, 10, 0.8);
+    padding: 1.5rem;
+    border-radius: 0.25rem;
+    backdrop-filter: blur(5px);
+    border-left: 3px solid var(--gold);
+  }
+  
+  .location-title {
+    color: var(--gold);
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  
+  .location-address {
+    color: var(--medium-text);
+    font-size: 0.875rem;
+    line-height: 1.6;
+  }

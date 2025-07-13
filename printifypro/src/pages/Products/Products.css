@@ -1,0 +1,476 @@
+/* Black & Gold Luxury Product Grid */
+:root {
+  --gold-light: #f1c40f;
+  --gold-primary: #FFD700;
+  --gold-dark: #bfa14a;
+  --black-light: #1a1a1a;
+  --black-medium: #0d0d0d;
+  --black-dark: #000000;
+  --text-light: #f5f5f5;
+  --text-muted: #ccc;
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --radius: 18px;
+  --shadow: 0 2px 16px rgba(255,215,0,0.07);
+}
+
+.products-page {
+  background: linear-gradient(135deg, var(--black-medium), var(--black-dark));
+  color: var(--text-light);
+  min-height: 100vh;
+  padding: 2.5rem 1rem 3rem 1rem;
+  font-family: 'Poppins', 'Segoe UI', Arial, sans-serif;
+}
+
+.products-title {
+  font-size: 2.7rem;
+  font-weight: 900;
+  text-align: center;
+  color: var(--gold-primary);
+  margin-bottom: 2.5rem;
+  letter-spacing: -1px;
+}
+
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2.5rem;
+}
+
+.search-bar {
+  background: var(--black-light);
+  padding: 0.7rem 1.2rem;
+  border-radius: 40px;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  border: 1.5px solid var(--gold-primary);
+  box-shadow: var(--shadow);
+}
+
+.search-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-light);
+  font-size: 1.05rem;
+  padding-left: 10px;
+}
+
+.search-input:focus {
+  outline: none;
+}
+
+.search-icon {
+  color: var(--gold-primary);
+}
+
+.bubble-grid,
+.bubble-grid-horizontal {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 2.2rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 1.5rem;
+  min-height: 420px;
+  max-height: 520px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-primary) var(--black-light);
+}
+
+.bubble-grid::-webkit-scrollbar,
+.bubble-grid-horizontal::-webkit-scrollbar {
+  height: 18px;
+}
+.bubble-grid::-webkit-scrollbar-thumb,
+.bubble-grid-horizontal::-webkit-scrollbar-thumb {
+  background: var(--gold-primary);
+  border-radius: 10px;
+}
+.bubble-grid::-webkit-scrollbar-track,
+.bubble-grid-horizontal::-webkit-scrollbar-track {
+  background: var(--black-light);
+}
+
+.bubble-card {
+  background: var(--black-medium);
+  border: 1.5px solid var(--gold-primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  min-width: 300px;
+  max-width: 300px;
+  min-height: 390px;
+  max-height: 390px;
+  display: flex;
+  flex-direction: column;
+  transition: var(--transition);
+  position: relative;
+}
+
+.bubble-card:hover {
+  border-color: var(--gold-light);
+  box-shadow: 0 4px 32px #FFD70022;
+  transform: translateY(-6px) scale(1.03);
+}
+
+.bubble-image-container {
+  width: 100%;
+  height: 180px;
+  background: var(--black-light);
+  overflow: hidden;
+  border-radius: var(--radius) var(--radius) 0 0;
+  position: relative;
+}
+
+.bubble-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s;
+}
+
+.bubble-card:hover .bubble-image {
+  transform: scale(1.06);
+}
+
+.bubble-favorite-button {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: var(--gold-primary);
+  color: var(--black-dark);
+  border: none;
+  border-radius: 50%;
+  padding: 0.45rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 8px #FFD70033;
+  transition: var(--transition);
+}
+
+.bubble-favorite-button:hover {
+  background: var(--black-dark);
+  color: var(--gold-primary);
+  border: 1.5px solid var(--gold-primary);
+}
+
+.bubble-content {
+  padding: 1.1rem 1rem 1rem 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  flex: 1;
+}
+
+.bubble-content h3 {
+  margin: 8px 0 4px;
+  font-size: 1.13rem;
+  color: var(--gold-light);
+  font-weight: 700;
+}
+
+.bubble-content p {
+  margin: 0 0 10px;
+  font-size: 0.97rem;
+  color: var(--text-muted);
+  flex-grow: 1;
+}
+
+.bubble-view-button {
+  background: var(--gold-primary);
+  color: var(--black-dark);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-top: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-size: 1rem;
+}
+
+.bubble-view-button:hover {
+  background: var(--black-dark);
+  color: var(--gold-primary);
+  border: 1.5px solid var(--gold-primary);
+}
+
+.add-to-cart-popup {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--black-medium);
+  border: 1.5px solid var(--gold-primary);
+  color: var(--gold-primary);
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  z-index: 1000;
+  box-shadow: 0 0 15px #FFD70033;
+  font-weight: 600;
+}
+
+/* Product Details Modal (View Details) */
+.product-details-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(15, 15, 15, 0.97);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeInModal 0.3s;
+}
+
+@keyframes fadeInModal {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.product-details-content {
+  display: flex;
+  flex-direction: row;
+  background: var(--black-medium);
+  border: 2.5px solid var(--gold-primary);
+  border-radius: 24px;
+  max-width: 800px;
+  width: 95vw;
+  min-height: 420px;
+  box-shadow: 0 8px 48px #FFD70033;
+  overflow: hidden;
+  position: relative;
+}
+
+.product-details-left {
+  flex: 1.2;
+  background: var(--black-dark);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem 1.5rem;
+  min-width: 0;
+}
+
+.product-details-image img {
+  width: 100%;
+  max-width: 320px;
+  border-radius: 16px;
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 2px 16px #FFD70022;
+}
+
+.product-details-right {
+  flex: 1.8;
+  padding: 2.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: var(--text-light);
+}
+
+.product-details-right h2 {
+  font-size: 2rem;
+  color: var(--gold-primary);
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+}
+
+.product-details-right p {
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  font-size: 1.08rem;
+}
+
+.product-details-right label {
+  color: var(--gold-primary);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.product-details-right textarea {
+  width: 100%;
+  min-height: 90px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1.5px solid var(--gold-primary);
+  background: var(--black-light);
+  color: var(--text-light);
+  font-size: 1.08rem;
+  margin-bottom: 1rem;
+  resize: vertical;
+  transition: var(--transition);
+}
+
+.product-details-right textarea:focus {
+  outline: none;
+  border-color: var(--gold-light);
+  box-shadow: 0 0 0 2px #FFD70033;
+}
+
+.luxury-button {
+  background: var(--gold-primary);
+  color: var(--black-dark);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 30px;
+  font-weight: bold;
+  font-size: 1.08rem;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-right: 0.7rem;
+}
+
+.luxury-button:hover {
+  background: var(--black-dark);
+  color: var(--gold-primary);
+  border: 1.5px solid var(--gold-primary);
+}
+
+@media (max-width: 900px) {
+  .product-details-content {
+    flex-direction: column;
+    min-height: 0;
+    max-width: 98vw;
+  }
+  .product-details-left, .product-details-right {
+    padding: 1.2rem 1rem;
+  }
+}
+@media (max-width: 600px) {
+  .product-details-content {
+    border-radius: 12px;
+    max-width: 99vw;
+  }
+  .product-details-left, .product-details-right {
+    padding: 0.7rem 0.5rem;
+  }
+  .product-details-right h2 {
+    font-size: 1.2rem;
+  }
+}
+
+/* Card container for collection bubbles (landing view) */
+.collection-card {
+  background: var(--black-light);
+  border-radius: 24px;
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 4px 32px #FFD70022;
+  padding: 2.5rem 2rem;
+  max-width: 700px;
+  margin: 0 auto 2.5rem auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 2.5rem;
+}
+
+/* Only show two bubbles in landing view */
+.collection-card .bubble-card {
+  min-width: 260px;
+  max-width: 260px;
+  min-height: 340px;
+  max-height: 340px;
+  border-radius: 18px;
+  background: var(--black-medium);
+  box-shadow: var(--shadow);
+}
+
+/* Card container for products in a collection */
+.products-scroll-card {
+  background: var(--black-light);
+  border-radius: 24px;
+  border: 2px solid var(--gold-primary);
+  box-shadow: 0 4px 32px #FFD70022;
+  padding: 2.5rem 2rem 1.5rem 2rem;
+  max-width: 1100px;
+  margin: 0 auto 2.5rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  position: relative;
+}
+
+.products-scroll-card .bubble-grid-horizontal {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  gap: 2rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  min-height: 320px;
+  max-height: 340px;
+  padding-bottom: 1.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--gold-primary) var(--black-light);
+  border-radius: 12px;
+  background: var(--black-medium);
+}
+
+.products-scroll-card .bubble-card {
+  min-width: 220px;
+  max-width: 220px;
+  min-height: 260px;
+  max-height: 260px;
+  border-radius: 12px;
+  background: var(--black-dark);
+  box-shadow: var(--shadow);
+}
+
+/* Back to collection button beside card */
+.back-to-collections-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+@media (max-width: 1024px) {
+  .bubble-card {
+    min-width: 220px;
+    max-width: 220px;
+    min-height: 300px;
+    max-height: 300px;
+  }
+  .bubble-image-container {
+    height: 110px;
+  }
+  .collection-card {
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 0.5rem;
+  }
+  .products-scroll-card {
+    padding: 1.5rem 0.5rem 1rem 0.5rem;
+  }
+}
+@media (max-width: 768px) {
+  .bubble-card {
+    min-width: 160px;
+    max-width: 160px;
+    min-height: 210px;
+    max-height: 210px;
+  }
+  .bubble-image-container {
+    height: 70px;
+  }
+  .collection-card .bubble-card,
+  .products-scroll-card .bubble-card {
+    min-width: 140px;
+    max-width: 140px;
+    min-height: 160px;
+    max-height: 160px;
+  }
+  .products-scroll-card .bubble-grid-horizontal {
+    min-height: 140px;
+    max-height: 160px;
+  }
+}

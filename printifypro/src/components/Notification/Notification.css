@@ -1,0 +1,73 @@
+.notification {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 15px 25px;
+    border-radius: 8px;
+    color: #FFD700; /* Gold text */
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.3);
+    animation: slideIn 0.3s ease-out;
+    background-color: rgba(0, 0, 0, 0.9); /* Semi-transparent black */
+    border: 1px solid #FFD700; /* Gold border */
+    backdrop-filter: blur(5px);
+  }
+  
+  .notification.add {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(30, 30, 0, 0.9) 100%);
+    border-left: 4px solid #FFD700;
+  }
+  
+  .notification.update {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.9) 0%, rgba(30, 20, 0, 0.9) 100%);
+    border-left: 4px solid #FFA500; /* Darker gold for update */
+  }
+  
+  .notification-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .notification-icon {
+    font-size: 1.3rem;
+    color: #FFD700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  }
+  
+  .notification-message {
+    font-size: 0.95rem;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  
+  .notification-close {
+    margin-left: 15px;
+    cursor: pointer;
+    color: #FFD700;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+  }
+  
+  .notification-close:hover {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Optional: Add a subtle glow effect on hover */
+  .notification:hover {
+    box-shadow: 0 4px 25px rgba(255, 215, 0, 0.4);
+  }

@@ -1,0 +1,489 @@
+/* Works.css - Gold & Black Oval Design with Bubble Cards */
+:root {
+  --gold-light: #f1c40f;
+  --gold-primary: #d4af37;
+  --gold-dark: #8a6d0b;
+  --black-light: #1a1a1a;
+  --black-medium: #0d0d0d;
+  --black-dark: #000000;
+  --text-light: #e6e6e6;
+  --text-dark: #333333;
+  --transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Base Styles */
+.designs-page {
+  background: linear-gradient(135deg, var(--black-medium), var(--black-dark));
+  color: var(--text-light);
+  min-height: 100vh;
+  font-family: 'Playfair Display', serif;
+  position: relative;
+  overflow-x: hidden;
+  /* Remove any overflow-y: hidden if present */
+  /* Ensure vertical scroll is allowed */
+}
+
+/* Floating Elements */
+.floating-elements {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.floating-element {
+  position: absolute;
+  background: radial-gradient(ellipse, rgba(212, 175, 55, 0.1), transparent 70%);
+  border-radius: 50%;
+  animation: float 25s linear infinite;
+  z-index: 0;
+  opacity: 0.3;
+}
+
+/* Animation */
+@keyframes float {
+  0% {
+    transform: translateY(100vh) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(-300px) rotate(360deg);
+    opacity: 0;
+  }
+}
+
+/* Header */
+.designs-header {
+  position: relative;
+  height: 40vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), 
+              url('/assets/textures/gold-texture.jpg') center/cover;
+  margin-bottom: 5rem;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.header-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, rgba(212, 175, 55, 0.2), transparent 70%);
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.header-content h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.7);
+  background: linear-gradient(to right, var(--gold-light), var(--gold-primary));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.header-content p {
+  font-size: 1.4rem;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0.9;
+  font-weight: 300;
+}
+
+/* Bubble Grid Styles */
+.bubble-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+  /* Remove any fixed height or overflow-y: hidden */
+  /* Let the grid grow with content */
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.bubble-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: linear-gradient(145deg, var(--black-light), var(--black-medium));
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+  padding-bottom: 30px;
+  box-shadow: 
+    0 15px 35px rgba(0, 0, 0, 0.5),
+    inset 0 0 30px rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  transition: var(--transition);
+  overflow: hidden;
+  height: 380px;
+  opacity: 0;
+  transform: translateY(50px);
+  animation: floatUp 1s forwards, float 6s ease-in-out infinite;
+}
+
+.bubble-card:nth-child(2n) {
+  animation-delay: 0.2s, 0.5s;
+}
+
+.bubble-card:nth-child(3n) {
+  animation-delay: 0.4s, 1s;
+}
+
+.bubble-card:nth-child(4n) {
+  animation-delay: 0.6s, 1.5s;
+}
+
+@keyframes floatUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.bubble-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 
+    0 25px 50px rgba(0, 0, 0, 0.6),
+    inset 0 0 40px rgba(212, 175, 55, 0.3);
+  border-color: var(--gold-primary);
+}
+
+.featured-bubble {
+  border: 3px solid var(--gold-primary);
+  box-shadow: 
+    0 15px 35px rgba(212, 175, 55, 0.3),
+    inset 0 0 40px rgba(212, 175, 55, 0.2);
+}
+
+.bubble-image-container {
+  width: 100%;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.bubble-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.bubble-card:hover .bubble-image {
+  transform: scale(1.1);
+}
+
+.bubble-favorite-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid var(--gold-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+  color: var(--gold-primary);
+  transition: var(--transition);
+  z-index: 3;
+}
+
+.bubble-favorite-button:hover {
+  background: var(--gold-primary);
+  color: var(--black-dark);
+  transform: scale(1.1);
+}
+
+.bubble-content {
+  padding: 20px;
+  text-align: center;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.bubble-content h3 {
+  margin: 10px 0 5px;
+  font-size: 1.2rem;
+  color: var(--gold-primary);
+  position: relative;
+}
+
+.bubble-content h3::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 2px;
+  background: var(--gold-primary);
+  border-radius: 2px;
+}
+
+.bubble-content p {
+  margin: 0 0 15px;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.8);
+  flex-grow: 1;
+}
+
+.bubble-view-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, var(--gold-dark), var(--gold-primary));
+  color: var(--black-dark);
+  border-radius: 30px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: var(--transition);
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  border: 1px solid var(--gold-dark);
+  font-family: 'Playfair Display', serif;
+}
+
+.bubble-view-button:hover {
+  background: linear-gradient(45deg, var(--gold-primary), var(--gold-light));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+  color: var(--black-dark);
+}
+
+/* Category Tabs */
+.category-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.tab-button {
+  padding: 12px 24px;
+  background: transparent;
+  border: 2px solid var(--gold-primary);
+  color: var(--gold-primary);
+  border-radius: 30px;
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: var(--transition);
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+  transition: all 0.6s ease;
+}
+
+.tab-button:hover::before {
+  left: 100%;
+}
+
+.tab-button.active {
+  background: var(--gold-primary);
+  color: var(--black-dark);
+  font-weight: 600;
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.4);
+}
+
+/* Custom Design Form */
+.custom-design-form, .signup-prompt {
+  background: linear-gradient(145deg, var(--black-light), var(--black-medium));
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin: 5rem auto;
+  max-width: 800px;
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.5),
+    inset 0 0 30px rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.signup-prompt {
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--gold-primary);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 4px;
+  color: var(--text-light);
+  transition: var(--transition);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--gold-primary);
+  box-shadow: 0 0 0 2px rgba(212, 175, 55, 0.2);
+}
+
+.submit-button, .signup-button {
+  background: linear-gradient(45deg, var(--gold-dark), var(--gold-primary));
+  color: var(--black-dark);
+  border: none;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Playfair Display', serif;
+}
+
+.submit-button:hover, .signup-button:hover {
+  background: linear-gradient(45deg, var(--gold-primary), var(--gold-light));
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+}
+
+.login-link {
+  color: var(--gold-primary);
+  text-decoration: none;
+  transition: var(--transition);
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+.login-link:hover {
+  text-decoration: underline;
+}
+
+.auth-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.designs-container {
+  width: 100%;
+  min-height: 0;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .bubble-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .header-content h1 {
+    font-size: 2.5rem;
+  }
+  
+  .header-content p {
+    font-size: 1.1rem;
+  }
+  
+  .bubble-grid {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  
+  .bubble-card {
+    height: 350px;
+  }
+  
+  .bubble-image-container {
+    height: 220px;
+  }
+}
+
+@media (max-width: 480px) {
+  .designs-header {
+    height: 50vh;
+  }
+  
+  .header-content h1 {
+    font-size: 2rem;
+  }
+  
+  .bubble-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 10px;
+  }
+  
+  .category-tabs {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .tab-button {
+    width: 80%;
+    margin-bottom: 10px;
+  }
+}

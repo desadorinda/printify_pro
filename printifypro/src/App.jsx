@@ -12,7 +12,6 @@ import Cart from './pages/Cart/Cart'
 import Checkout from './pages/Checkout/Checkout'
 import Dashboard from './pages/Dashboard/Dashboard'
 import AdminDashboard from './pages/Dashboard/AdminDashboard'
-import Profile from './pages/Profile/Profile'
 import Notification from './components/Notification/Notification'
 
 // Design Categories

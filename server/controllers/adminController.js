@@ -1,3 +1,38 @@
+// --- ADMIN DASHBOARD & CUSTOM DESIGN STUB HANDLERS ---
+module.exports.getAllReviews = async (req, res) => {
+  res.status(200).json({ message: 'getAllReviews stub' });
+};
+module.exports.getAdminStats = async (req, res) => {
+  res.status(200).json({ message: 'getAdminStats stub' });
+};
+module.exports.getAllCustomDesignRequests = async (req, res) => {
+  res.status(200).json({ message: 'getAllCustomDesignRequests stub' });
+};
+// --- OUTLINE & DESIGN STUB HANDLERS ---
+module.exports.getAllOutlines = async (req, res) => {
+  res.status(200).json({ message: 'getAllOutlines stub' });
+};
+module.exports.addOutline = async (req, res) => {
+  res.status(201).json({ message: 'addOutline stub' });
+};
+module.exports.editOutline = async (req, res) => {
+  res.status(200).json({ message: 'editOutline stub' });
+};
+module.exports.deleteOutline = async (req, res) => {
+  res.status(200).json({ message: 'deleteOutline stub' });
+};
+module.exports.addDesignToOutline = async (req, res) => {
+  res.status(201).json({ message: 'addDesignToOutline stub' });
+};
+module.exports.getDesignsByOutline = async (req, res) => {
+  res.status(200).json({ message: 'getDesignsByOutline stub' });
+};
+module.exports.deleteDesignById = async (req, res) => {
+  res.status(200).json({ message: 'deleteDesignById stub' });
+};
+module.exports.updateDesignById = async (req, res) => {
+  res.status(200).json({ message: 'updateDesignById stub' });
+};
 // Admin registration controller
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
@@ -25,7 +60,7 @@ const upload = multer({
 // Export upload for use in routes
 module.exports.upload = upload;
 
-exports.registerAdmin = async (req, res) => {
+module.exports.registerAdmin = async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
     return res.status(400).json({ error: 'All fields are required' });
@@ -56,7 +91,7 @@ exports.registerAdmin = async (req, res) => {
 };
 
 // Get all users (for admin dashboard)
-exports.getAllUsers = async (req, res) => {
+module.exports.getAllUsers = async (req, res) => {
   try {
     const [users] = await pool.query(
       'SELECT id, username, email, role, status, created_at FROM users ORDER BY id DESC'
@@ -70,7 +105,7 @@ exports.getAllUsers = async (req, res) => {
 };
 
 // Get all collections
-exports.getAllCollections = async (req, res) => {
+module.exports.getAllCollections = async (req, res) => {
   try {
     const [collections] = await pool.query('SELECT * FROM collections ORDER BY id DESC');
     // Prepend /uploads/ if not present for image_url
@@ -87,7 +122,7 @@ exports.getAllCollections = async (req, res) => {
 };
 
 // Add collection (with image upload)
-exports.addCollection = async (req, res) => {
+module.exports.addCollection = async (req, res) => {
   try {
     const { name, description, tags } = req.body;
     // Fix: always coerce featured to 1 or 0, default to 0 if missing or falsy
@@ -113,7 +148,7 @@ exports.addCollection = async (req, res) => {
 };
 
 // Edit collection (with image upload)
-exports.editCollection = async (req, res) => {
+module.exports.editCollection = async (req, res) => {
   const { id } = req.params;
   try {
     const { name, description, tags, featured } = req.body;
@@ -141,7 +176,7 @@ exports.editCollection = async (req, res) => {
 };
 
 // Get products by collection
-exports.getProductsByCollection = async (req, res) => {
+module.exports.getProductsByCollection = async (req, res) => {
   const { collectionId } = req.params;
   try {
     const [products] = await pool.query(
@@ -163,7 +198,7 @@ exports.getProductsByCollection = async (req, res) => {
 };
 
 // Add product (with images)
-exports.addProduct = async (req, res) => {
+module.exports.addProduct = async (req, res) => {
   try {
     const { name, description, price, stock, collection_id, tags } = req.body;
     if (!name || !price || !collection_id) {
@@ -193,7 +228,7 @@ exports.addProduct = async (req, res) => {
 };
 
 // Edit product (with images)
-exports.editProduct = async (req, res) => {
+module.exports.editProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const { name, description, price, stock, collection_id, tags } = req.body;
@@ -223,7 +258,7 @@ exports.editProduct = async (req, res) => {
 };
 
 // Delete product and its images
-exports.deleteProduct = async (req, res) => {
+module.exports.deleteProduct = async (req, res) => {
   const { id } = req.params;
   try {
     // Delete images from disk
@@ -243,7 +278,7 @@ exports.deleteProduct = async (req, res) => {
 };
 
 // Get product details (with images, likes, reviews, orders count)
-exports.getProductDetails = async (req, res) => {
+module.exports.getProductDetails = async (req, res) => {
   const { id } = req.params;
   try {
     const [[product]] = await pool.query('SELECT * FROM products WHERE id = ?', [id]);
@@ -270,7 +305,7 @@ exports.getProductDetails = async (req, res) => {
 };
 
 // Get likes for a product (with user check)
-exports.getProductLikes = async (req, res) => {
+module.exports.getProductLikes = async (req, res) => {
   const { id } = req.params;
   let userId = undefined;
   // Try to decode token if present
@@ -301,7 +336,7 @@ exports.getProductLikes = async (req, res) => {
 };
 
 // Get reviews for a product
-exports.getProductReviews = async (req, res) => {
+module.exports.getProductReviews = async (req, res) => {
   const { id } = req.params;
   try {
     const [reviews] = await pool.query(
@@ -316,7 +351,7 @@ exports.getProductReviews = async (req, res) => {
 };
 
 // Get orders for a product
-exports.getProductOrders = async (req, res) => {
+module.exports.getProductOrders = async (req, res) => {
   const { id } = req.params;
   try {
     const [orders] = await pool.query(
@@ -336,7 +371,7 @@ exports.getProductOrders = async (req, res) => {
 };
 
 // Delete collection and its products/images
-exports.deleteCollection = async (req, res) => {
+module.exports.deleteCollection = async (req, res) => {
   const { id } = req.params;
   try {
     // Delete all product images for products in this collection
@@ -362,7 +397,7 @@ exports.deleteCollection = async (req, res) => {
 };
 
 // Like a product
-exports.likeProduct = async (req, res) => {
+module.exports.likeProduct = async (req, res) => {
   try {
     const userId = req.user?.id || req.body.userId; // Use JWT or fallback to body
     const productId = req.params.id;
@@ -381,7 +416,7 @@ exports.likeProduct = async (req, res) => {
 };
 
 // Unlike a product
-exports.unlikeProduct = async (req, res) => {
+module.exports.unlikeProduct = async (req, res) => {
   try {
     const userId = req.user?.id || req.body.userId;
     const productId = req.params.id;
@@ -399,7 +434,7 @@ exports.unlikeProduct = async (req, res) => {
 };
 
 // Add to cart
-exports.addToCart = async (req, res) => {
+module.exports.addToCart = async (req, res) => {
   try {
     const userId = req.user?.id;
     // Accept both productId and product_id from frontend
@@ -432,14 +467,14 @@ exports.addToCart = async (req, res) => {
       await pool.query('INSERT INTO cart_items (cart_id, product_id, quantity, description) VALUES (?, ?, ?, ?)', [cartId, prodId, Math.min(quantity, product.stock), description]);
     }
     // Return updated cart
-    return exports.getUserCart(req, res);
+    return module.exports.getUserCart(req, res);
   } catch (err) {
     console.error('Add to cart error:', err);
     res.status(500).json({ error: 'Server error' });
   }
 };
 // Add to cart (supports both productId and designId)
-exports.addToCartDesignOrProduct = async (req, res) => {
+module.exports.addToCartDesignOrProduct = async (req, res) => {
   try {
     const userId = req.user?.id;
     const { productId, product_id, designId, design_id, quantity = 1, description = null } = req.body;
@@ -484,7 +519,7 @@ exports.addToCartDesignOrProduct = async (req, res) => {
       }
     }
     // Return updated cart
-    return exports.getUserCart(req, res);
+    return module.exports.getUserCart(req, res);
   } catch (err) {
     console.error('Add to cart (product/design) error:', err);
     res.status(500).json({ error: 'Server error' });
@@ -492,7 +527,7 @@ exports.addToCartDesignOrProduct = async (req, res) => {
 };
 
 // Add a review
-exports.addReview = async (req, res) => {
+module.exports.addReview = async (req, res) => {
   try {
     const userId = req.user?.id || req.body.userId;
     const productId = req.params.id;
@@ -508,7 +543,7 @@ exports.addReview = async (req, res) => {
 };
 
 // Get all products with like counts and user like status
-exports.getProductsWithLikes = async (req, res) => {
+module.exports.getProductsWithLikes = async (req, res) => {
   try {
     const userId = req.user?.id;
     const [products] = await pool.query('SELECT * FROM products');
@@ -530,7 +565,7 @@ exports.getProductsWithLikes = async (req, res) => {
 };
 
 // Get user's cart items (to check if product or design is in cart)
-exports.getUserCart = async (req, res) => {
+module.exports.getUserCart = async (req, res) => {
   try {
     const userId = req.user?.id;
     if (!userId) return res.status(401).json({ error: 'Unauthorized' });
@@ -565,7 +600,7 @@ exports.getUserCart = async (req, res) => {
 };
 
 // Update cart item quantity and description
-exports.updateCartQuantity = async (req, res) => {
+module.exports.updateCartQuantity = async (req, res) => {
   console.log('[updateCartQuantity] called', { params: req.params, body: req.body, user: req.user });
   try {
     const userId = req.user?.id;
@@ -599,7 +634,7 @@ exports.updateCartQuantity = async (req, res) => {
       return res.status(400).json({ error: 'Failed to update cart item quantity.' });
     }
     // Return updated cart
-    return exports.getUserCart(req, res);
+    return module.exports.getUserCart(req, res);
   } catch (err) {
     console.error('Update cart quantity error:', err);
     res.status(500).json({ error: 'Server error' });
@@ -607,7 +642,7 @@ exports.updateCartQuantity = async (req, res) => {
 };
 
 // Remove item from cart
-exports.removeFromCart = async (req, res) => {
+module.exports.removeFromCart = async (req, res) => {
   try {
     const userId = req.user?.id;
     const { cartItemId } = req.params;
@@ -642,7 +677,7 @@ exports.removeFromCart = async (req, res) => {
 };
 
 // Checkout order: move cart items to orders, store all form details
-exports.checkoutOrder = async (req, res) => {
+module.exports.checkoutOrder = async (req, res) => {
   let connection;
   try {
     const userId = req.user?.id;
@@ -711,7 +746,7 @@ exports.checkoutOrder = async (req, res) => {
 };
 
 // Get all orders
-exports.getAllOrders = async (req, res) => {
+module.exports.getAllOrders = async (req, res) => {
   try {
     const [orders] = await pool.query(
       `SELECT o.id, o.user_id, u.username, o.total_amount, o.status, o.payment_method, o.shipping_address, o.placed_at, o.recipient_name, o.phone, o.email, o.notes
@@ -727,7 +762,7 @@ exports.getAllOrders = async (req, res) => {
 };
 
 // Get single order with items
-exports.getOrderById = async (req, res) => {
+module.exports.getOrderById = async (req, res) => {
   const { orderId } = req.params;
   try {
     const [[order]] = await pool.query(
@@ -753,7 +788,7 @@ exports.getOrderById = async (req, res) => {
 };
 
 // Update order status
-exports.updateOrderStatus = async (req, res) => {
+module.exports.updateOrderStatus = async (req, res) => {
   const { orderId } = req.params;
   const { status } = req.body;
   // Only allow valid statuses
